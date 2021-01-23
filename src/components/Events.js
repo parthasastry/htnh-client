@@ -13,6 +13,66 @@ const data = [
     timepart: "7 PM",
     event: "Hanuman Chalisa ",
   },
+  {
+    day: "Monday",
+    datepart: "2021-01-16",
+    timepart: "10 AM",
+    event: "Linghashtakam and Thirumurai ",
+  },
+  {
+    day: "Tuesday",
+    datepart: "2021-01-17",
+    timepart: "7 PM",
+    event: "Hanuman Chalisa ",
+  },
+  {
+    day: "Monday",
+    datepart: "2021-01-16",
+    timepart: "10 AM",
+    event: "Linghashtakam and Thirumurai ",
+  },
+  {
+    day: "Tuesday",
+    datepart: "2021-01-17",
+    timepart: "7 PM",
+    event: "Hanuman Chalisa ",
+  },
+  {
+    day: "Monday",
+    datepart: "2021-01-16",
+    timepart: "10 AM",
+    event: "Linghashtakam and Thirumurai ",
+  },
+  {
+    day: "Tuesday",
+    datepart: "2021-01-17",
+    timepart: "7 PM",
+    event: "Hanuman Chalisa ",
+  },
+  {
+    day: "Monday",
+    datepart: "2021-01-16",
+    timepart: "10 AM",
+    event: "Linghashtakam and Thirumurai ",
+  },
+  {
+    day: "Tuesday",
+    datepart: "2021-01-17",
+    timepart: "7 PM",
+    event: "Hanuman Chalisa ",
+  },
+  {
+    day: "Monday",
+    datepart: "2021-01-16",
+    timepart: "10 AM",
+    event: "Linghashtakam and Thirumurai ",
+  },
+  {
+    day: "Tuesday",
+    datepart: "2021-01-17",
+    timepart: "7 PM",
+    event: "Hanuman Chalisa ",
+  },
 ];
 
 export class Events extends Component {
@@ -40,7 +100,7 @@ export class Events extends Component {
     });
 
     return (
-      <div>
+      <div className="container">
         <h4 className="text center">Events</h4>
         <table className="striped centered">
           {tableHeader}

@@ -4,6 +4,7 @@ import "./App.css";
 
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
+import Deities from "./components/Deities";
 import Events from "./components/Events";
 import Donate from "./components/Donate";
 import Contact from "./components/Contact";
@@ -20,6 +21,10 @@ function App() {
 
         <Route exact path="/events">
           <Events />
+        </Route>
+
+        <Route exact path="/deities">
+          <Deities />
         </Route>
 
         <Route exact path="/donate">
