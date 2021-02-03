@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import { init } from "emailjs-com";
+import M from "materialize-css/dist/js/materialize.min.js";
 import TempleMap from "./TempleMap.js";
 
 const Contact = () => {
@@ -9,6 +10,7 @@ const Contact = () => {
   const [subscribe, setSubscribe] = useState(false);
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState("");
 
   function sendEmail(e) {
     e.preventDefault();
@@ -23,16 +25,27 @@ const Contact = () => {
       subscribe: subscribe,
     };
 
-    emailjs
-      .send("service_i8j7drm", "template_hv4n5hl", templateParams)
-      .then((result) => console.log(result))
-      .catch((error) => console.log(error));
+    if (from && phone && email && message) {
+      emailjs
+        .send("service_i8j7drm", "template_hv4n5hl", templateParams)
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => console.log(error));
 
-    setFrom("");
-    setPhone("");
-    setMessage("");
-    setEmail("");
-    setSubscribe(false);
+      M.toast({
+        html: "Message sent to Hindu temple of New Hampshire!!",
+        classes: "rounded",
+      });
+      setFrom("");
+      setPhone("");
+      setMessage("");
+      setEmail("");
+      setSubscribe(false);
+      setErrors("");
+    } else {
+      setErrors("Please enter valid values for name, phone, email and message");
+    }
   }
 
   const inputForm = (
@@ -122,12 +135,20 @@ const Contact = () => {
     <div className="container">
       <div className="row">
         <div className="col l6 m6 s12">
+          <h5 className="text center">Contact Form</h5>
+          {errors.length === 0 ? (
+            <div>{inputForm}</div>
+          ) : (
+            <div>
+              <p className="red">{errors} </p>
+              {inputForm}
+            </div>
+          )}
+        </div>
+        <div className="col l2 m2 s12"></div>
+        <div className="col l4 m4 s12">
           <h5 className="text center">Temple Location</h5>
           <TempleMap />
-        </div>
-        <div className="col l6 m6 s12">
-          <h5 className="text center">Contact Form</h5>
-          {inputForm}
         </div>
       </div>
     </div>

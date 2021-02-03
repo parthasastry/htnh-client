@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 
 const mapStyles = {
-  width: "400px",
-  height: "300px",
+  width: "500px",
+  height: "500px",
 };
 
 export class TempleMap extends Component {
