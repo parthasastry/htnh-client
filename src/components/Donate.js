@@ -30,6 +30,7 @@ const Donate = () => {
         console.log(response);
         const { status } = response;
         console.log("Status: ", status);
+        setDonation(0);
       })
       .catch((err) => console.log(err));
   };
@@ -38,6 +39,9 @@ const Donate = () => {
     <div className="App">
       <div className="container">
         <h5>Please donate to HTNH</h5>
+        <label for="price" data-error="wrong" data-success="right">
+          Enter Amount in USD (US Dollars)
+        </label>
         <input
           type="number"
           name="price"

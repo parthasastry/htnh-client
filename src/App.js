@@ -5,6 +5,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Deities from "./components/Deities";
+import Priests from "./components/Priests";
 import Events from "./components/Events";
 import Donate from "./components/Donate";
 import Contact from "./components/Contact";
@@ -25,6 +26,10 @@ function App() {
 
         <Route exact path="/deities">
           <Deities />
+        </Route>
+
+        <Route exact path="/priests">
+          <Priests />
         </Route>
 
         <Route exact path="/donate">

@@ -1,114 +1,58 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
+import sanityClient from "../sanityClient";
 
-const data = [
-  {
-    day: "Monday",
-    datepart: "2021-01-16",
-    timepart: "10 AM",
-    event: "Linghashtakam and Thirumurai ",
-  },
-  {
-    day: "Tuesday",
-    datepart: "2021-01-17",
-    timepart: "7 PM",
-    event: "Hanuman Chalisa ",
-  },
-  {
-    day: "Monday",
-    datepart: "2021-01-16",
-    timepart: "10 AM",
-    event: "Linghashtakam and Thirumurai ",
-  },
-  {
-    day: "Tuesday",
-    datepart: "2021-01-17",
-    timepart: "7 PM",
-    event: "Hanuman Chalisa ",
-  },
-  {
-    day: "Monday",
-    datepart: "2021-01-16",
-    timepart: "10 AM",
-    event: "Linghashtakam and Thirumurai ",
-  },
-  {
-    day: "Tuesday",
-    datepart: "2021-01-17",
-    timepart: "7 PM",
-    event: "Hanuman Chalisa ",
-  },
-  {
-    day: "Monday",
-    datepart: "2021-01-16",
-    timepart: "10 AM",
-    event: "Linghashtakam and Thirumurai ",
-  },
-  {
-    day: "Tuesday",
-    datepart: "2021-01-17",
-    timepart: "7 PM",
-    event: "Hanuman Chalisa ",
-  },
-  {
-    day: "Monday",
-    datepart: "2021-01-16",
-    timepart: "10 AM",
-    event: "Linghashtakam and Thirumurai ",
-  },
-  {
-    day: "Tuesday",
-    datepart: "2021-01-17",
-    timepart: "7 PM",
-    event: "Hanuman Chalisa ",
-  },
-  {
-    day: "Monday",
-    datepart: "2021-01-16",
-    timepart: "10 AM",
-    event: "Linghashtakam and Thirumurai ",
-  },
-  {
-    day: "Tuesday",
-    datepart: "2021-01-17",
-    timepart: "7 PM",
-    event: "Hanuman Chalisa ",
-  },
-];
+const Events = () => {
+  const [events, setEvents] = useState([]);
 
-export class Events extends Component {
-  render() {
-    const tableHeader = (
-      <thead>
-        <tr>
-          <th>Day</th>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Event Description</th>
-        </tr>
-      </thead>
-    );
+  useEffect(() => {
+    sanityClient
+      .fetch(
+        `*[_type == 'event']{
+            title,
+            when,
+            remarks,
+        }`
+      )
+      .then((data) => setEvents(data))
+      .catch((err) => console.log(err));
+  }, []);
 
-    const tableData = data.map((d) => {
-      return (
-        <tr>
-          <td>{d.day}</td>
-          <td>{d.datepart}</td>
-          <td>{d.timepart}</td>
-          <td>{d.event}</td>
-        </tr>
-      );
-    });
+  console.log(events);
 
+  const tableHeader = (
+    <thead>
+      <tr>
+        <th>Event Description</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Remarks</th>
+      </tr>
+    </thead>
+  );
+
+  const tableData = events.map((d, i) => {
+    let dt = new Date(d.when);
+    let ts = dt.toLocaleDateString();
+    let tm = dt.toLocaleTimeString();
     return (
-      <div className="container">
-        <h4 className="text center">Events</h4>
-        <table className="striped centered">
-          {tableHeader}
-          <tbody>{tableData}</tbody>
-        </table>
-      </div>
+      <tr key={i}>
+        <td>{d.title}</td>
+        <td>{ts}</td>
+        <td>{tm}</td>
+        <td>{d.remarks}</td>
+      </tr>
     );
-  }
-}
+  });
+
+  return (
+    <div className="container">
+      <h4 className="text center">Events</h4>
+      <table className="responsive-table centered">
+        {tableHeader}
+        <tbody>{tableData}</tbody>
+      </table>
+    </div>
+  );
+};
 
 export default Events;
