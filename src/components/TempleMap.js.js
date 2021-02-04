@@ -1,15 +1,32 @@
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
+import sanityClient from "../sanityClient";
 
 const mapStyles = {
   width: "500px",
   height: "500px",
 };
 
+const apiKEY = "";
+
 export class TempleMap extends Component {
+  componentDidMount() {
+    sanityClient
+      .fetch(
+        `*[_type == 'mapapi']{
+                  mapAPI,
+              }`
+      )
+      .then((data) => {
+        apiKEY = data[0].mapAPI;
+      })
+      .catch((err) => console.log(err));
+  }
+
   render() {
     const lat = 42.7488;
     const lon = -71.522;
+
     return (
       <Map
         google={this.props.google}
@@ -24,5 +41,5 @@ export class TempleMap extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyD2xZvCNlR6CwLaGyeebSBQqJkwY2Te0qg&callback=initMap",
+  apiKey: apiKEY,
 })(TempleMap);

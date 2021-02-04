@@ -7,6 +7,7 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 // We import object and document schemas
 import event from "./event";
 import priest from "./priest";
+import mapAPI from "./mapAPI";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -19,5 +20,6 @@ export default createSchema({
     // in the studio.
     event,
     priest,
+    mapAPI,
   ]),
 });
